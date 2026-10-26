@@ -226,6 +226,75 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+    .look-jour {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .look-jour img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      flex-shrink: 0;
+      align-self: flex-start;
+      background: #fafafa;
+      border-radius: 12px;
+    }
+    .look-jour h3 {
+      margin: 0 0 6px 0;
+      font-size: 18px;
+    }
+    .look-jour p {
+      margin: 4px 0;
+      color: #444;
+    }
+    .cal-day.today {
+      box-shadow: inset 0 0 0 2px #1e1e24;
+    }
+    #galerie figure {
+      cursor: zoom-in;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 24px;
+    }
+    .lightbox.open {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 75vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+    .lightbox p {
+      color: #fff;
+      margin-top: 12px;
+      text-align: center;
+    }
+    .lightbox button {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
     @media (max-width: 600px) {
       header.hero {
         flex-direction: column;
@@ -273,6 +342,14 @@
     <p>Mon principe est simple : ma base ne change jamais, un seul détail change par occasion. Un bonnet rouge à Noël, des oreilles de lapin à Pâques, une couronne à l'Épiphanie, un déguisement de clown à Mardi gras. Après chaque occasion, je reviens à ma base.</p>
     <p>Les icônes de saison font exception à moitié : elles flottent sur le côté, mais uniquement le jour du changement de saison. Les autres jours sans occasion, c'est la base qui s'affiche, sans icône.</p>
   
+    <div class="look-jour">
+      <img id="look-du-jour-img" src="images/base.webp" alt="Look du jour">
+      <div>
+        <h3 id="look-du-jour-title">Look du jour — Base</h3>
+        <p id="look-du-jour-text">Aujourd'hui, pas d'occasion publique : c'est la base qui s'affiche.</p>
+      </div>
+    </div>
+
   </section>
 
   <section id="galerie" class="tab-panel" role="tabpanel">
@@ -372,7 +449,7 @@
     <h2>Calendrier des occasions publiques</h2>
     <p>Les 12 mois d'un seul coup : le mois en cours + les 11 suivants. La vue se met à jour toute seule au passage de mois. Cliquez sur un jour coloré pour voir son look. Deux looks personnels (anniversaire, fête) s'affichent aussi à leurs dates, qui ne sont pas listées ici.</p>
     <div id="cal-year" class="cal-year"></div>
-    <p class="cal-legend">Légende : orange foncé = jour d'occasion, orange clair = fenêtre (Halloween, Noël, Épiphanie, rentrée), violet = Carême, bleu-vert = jour de changement de saison (date approchée, elle peut varier d'un jour selon l'année).</p>
+    <p class="cal-legend">Légende : orange foncé = jour d'occasion, orange clair = fenêtre (Halloween, Noël, Épiphanie, rentrée), violet = Carême, bleu-vert = jour de changement de saison (date approchée, elle peut varier d'un jour selon l'année). Bordure noire = aujourd'hui.</p>
     <div class="cal-detail">
       <img id="cal-detail-img" src="images/base.webp" alt="Look du jour sélectionné">
       <div>
@@ -473,6 +550,7 @@
       <li><strong>26/10/2026 — Trois corrections.</strong> Le cœur de Saint-Valentin et le poisson du 1er avril ont été agrandis ; la bougie de Toussaint est passée d'une position flottante à une position sur la tête, avec de la cire qui coule.</li>
       <li><strong>26/10/2026 — Le site devient complet.</strong> Présentation, galerie, calendrier, archives, fiche de personnage et journal sont réunis sur cette page.</li>
           <li><strong>26/10/2026 — Navigation par onglets.</strong> La page en enfilade devient une navigation par onglets, avec un style modernisé.</li>
+      <li><strong>26/10/2026 — Look du jour, aujourd'hui et galerie en grand.</strong> La Présentation affiche le look du jour, le jour actuel est encadré dans le calendrier, et un clic sur un look de la galerie l'affiche en grand.</li>
     </ul>
   
   </section>
@@ -615,6 +693,9 @@
           var info = occ[key(date)];
           var span = document.createElement("span");
           span.className = "cal-day" + (info ? " clickable " + info.kind : "");
+          if (y === now.getFullYear() && m === now.getMonth() && n === now.getDate()) {
+            span.className += " today";
+          }
           span.textContent = n;
           if (info) {
             span.title = info.name;
@@ -633,6 +714,46 @@
         }
         card.appendChild(days);
         container.appendChild(card);
+      });
+      var todayInfo = occ[key(now)];
+      if (todayInfo) {
+        document.getElementById("look-du-jour-img").src = "images/" + todayInfo.img;
+        document.getElementById("look-du-jour-img").alt = todayInfo.name;
+        document.getElementById("look-du-jour-title").textContent = "Look du jour — " + todayInfo.name;
+        document.getElementById("look-du-jour-text").textContent = todayInfo.text;
+      }
+    })();
+  </script>
+  <div id="lightbox" class="lightbox" role="dialog" aria-label="Look en grand">
+    <button id="lightbox-close" aria-label="Fermer">×</button>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-caption"></p>
+  </div>
+
+  <script>
+    (function () {
+      var box = document.getElementById("lightbox");
+      var img = document.getElementById("lightbox-img");
+      var cap = document.getElementById("lightbox-caption");
+      function close() {
+        box.classList.remove("open");
+        img.src = "";
+      }
+      document.querySelectorAll("#galerie figure").forEach(function (fig) {
+        fig.addEventListener("click", function () {
+          var im = fig.querySelector("img");
+          img.src = im.src;
+          img.alt = im.alt;
+          cap.textContent = fig.querySelector("figcaption").textContent;
+          box.classList.add("open");
+        });
+      });
+      document.getElementById("lightbox-close").addEventListener("click", close);
+      box.addEventListener("click", function (e) {
+        if (e.target === box) close();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") close();
       });
     })();
   </script>
