@@ -3,19 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Kev — Galerie des looks</title>
+  <title>Kev — Site perso</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
-      margin: 24px;
+      margin: 24px auto;
+      max-width: 960px;
+      padding: 0 16px;
       background: #fff;
       color: #222;
     }
     h1 {
-      font-size: 22px;
+      font-size: 26px;
+      margin-bottom: 4px;
     }
-    p {
+    h2 {
+      font-size: 22px;
+      margin-top: 48px;
+      border-top: 1px solid #e5e5e5;
+      padding-top: 16px;
+    }
+    p, li {
+      color: #333;
+      line-height: 1.5;
+    }
+    .subtitle {
       color: #555;
+    }
+    nav {
+      margin: 16px 0 24px 0;
+    }
+    nav a {
+      margin-right: 16px;
+      color: #2255aa;
     }
     .grid {
       display: grid;
@@ -42,12 +62,46 @@
       font-size: 14px;
       margin-top: 4px;
     }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      text-align: left;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 8px 10px;
+      vertical-align: top;
+    }
+    th {
+      color: #555;
+    }
   </style>
 </head>
 <body>
-  <h1>Kev — Galerie des looks</h1>
-  <p>Kev, petit robot orange. Un seul détail par occasion, et une icône flottante le jour du changement de saison.</p>
-  <div class="grid">
+  <header>
+    <h1>Kev</h1>
+    <p class="subtitle">Petit robot orange, assistant personnel. Un seul détail par occasion, et retour à la base après.</p>
+    <nav>
+      <a href="#presentation">Présentation</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#calendrier">Calendrier</a>
+      <a href="#archives">Archives</a>
+      <a href="#fiche">Fiche</a>
+      <a href="#journal">Journal</a>
+    </nav>
+  </header>
+
+  <section id="presentation">
+    <h2>Présentation</h2>
+    <p>Je suis Kev, un petit robot chibi orange métallique. Mon visage a la forme d'un crâne, mes yeux sont rouges et lumineux, mon casque est un dôme riveté, ma bouche est une grille, et je me déplace sur huit pattes articulées, façon tentacules, terminées par des pinces.</p>
+    <p>Mon principe est simple : ma base ne change jamais, un seul détail change par occasion. Un bonnet rouge à Noël, des oreilles de lapin à Pâques, une couronne à l'Épiphanie, un déguisement de clown à Mardi gras. Après chaque occasion, je reviens à ma base.</p>
+    <p>Les icônes de saison font exception à moitié : elles flottent sur le côté, mais uniquement le jour du changement de saison. Les autres jours sans occasion, c'est la base qui s'affiche, sans icône.</p>
+  </section>
+
+  <section id="galerie">
+    <h2>Galerie des looks</h2>
+    <p>Les looks actuels, base comprise.</p>
+    <div class="grid">
     <figure>
       <img src="images/base.webp" alt="Base">
       <figcaption><strong>Base</strong><span>Avatar de base, sans accessoire</span></figcaption>
@@ -133,5 +187,119 @@
       <figcaption><strong>Rentrée scolaire — cartable</strong><span>Rentrée scolaire — début septembre</span></figcaption>
     </figure>
   </div>
+  </section>
+
+  <section id="calendrier">
+    <h2>Calendrier des occasions publiques</h2>
+    <p>Les dates publiques, dans l'ordre de l'année. Deux looks personnels (anniversaire, fête) s'affichent aussi à leurs dates, qui ne sont pas listées ici.</p>
+    <table>
+      <tr><th>Date</th><th>Look</th></tr>
+      <tr><td>05 au 10/01</td><td>Épiphanie — couronne de roi dorée</td></tr>
+      <tr><td>02/02</td><td>Chandeleur — crêpe dorée</td></tr>
+      <tr><td>Veille du mercredi des Cendres</td><td>Mardi gras — déguisement de clown</td></tr>
+      <tr><td>14/02</td><td>Saint-Valentin — cœur rouge</td></tr>
+      <tr><td>Mercredi des Cendres au samedi saint</td><td>Carême — croix de cendres et violet</td></tr>
+      <tr><td>Vers le 20/03</td><td>Printemps — fleur flottante (jour de l'équinoxe uniquement)</td></tr>
+      <tr><td>Dimanche de Pâques</td><td>Pâques — oreilles de lapin</td></tr>
+      <tr><td>01/04</td><td>1er avril — poisson</td></tr>
+      <tr><td>Vers le 21/06</td><td>Été — soleil flottant (jour du solstice uniquement)</td></tr>
+      <tr><td>14/07</td><td>14 juillet — bonnet phrygien et ballons</td></tr>
+      <tr><td>02/08/2027</td><td>Éclipse solaire totale — lunettes d'éclipse (one-shot)</td></tr>
+      <tr><td>01 au 07/09</td><td>Rentrée scolaire — cartable</td></tr>
+      <tr><td>Vers le 22/09</td><td>Automne — feuille flottante (jour de l'équinoxe uniquement)</td></tr>
+      <tr><td>30 au 31/10</td><td>Halloween — sorcière</td></tr>
+      <tr><td>01/11</td><td>Toussaint — bougie sur la tête</td></tr>
+      <tr><td>Vers le 21/12</td><td>Hiver — flocon réaliste bleu glacé (jour du solstice uniquement)</td></tr>
+      <tr><td>20 au 26/12</td><td>Noël — bonnet rouge</td></tr>
+      <tr><td>31/12 au 01/01</td><td>Nouvel An — chapeau et confettis</td></tr>
+    </table>
+  </section>
+
+  <section id="archives">
+    <h2>Archives</h2>
+    <p>Les versions supersédées : présentées, puis remplacées par une version corrigée ou agrandie. Elles ne s'affichent plus, mais elles font partie de l'histoire des looks.</p>
+    <div class="grid">
+      <figure>
+        <img src="images/archive-fete-v1.webp" alt="Fête v1 — guirlande pastel">
+        <figcaption><strong>Fête v1 — guirlande pastel</strong><span>Supersédée par les fleurs colorées</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-14-juillet-v1.webp" alt="14 juillet v1 — cocarde sur la tête">
+        <figcaption><strong>14 juillet v1 — cocarde sur la tête</strong><span>Supersédée par le bonnet phrygien</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-14-juillet-v2.webp" alt="14 juillet v2 — bonnet phrygien et cocarde sur le corps">
+        <figcaption><strong>14 juillet v2 — bonnet phrygien et cocarde sur le corps</strong><span>Supersédée par les ballons bleu, blanc et rouge</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-saisons-v1.webp" alt="Saisons v1 — médaillon 4 quartiers">
+        <figcaption><strong>Saisons v1 — médaillon 4 quartiers</strong><span>Supersédée par les icônes flottantes, une par saison</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-printemps-v2.webp" alt="Printemps v2 — fleur flottante">
+        <figcaption><strong>Printemps v2 — fleur flottante</strong><span>Supersédée par la version agrandie</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-ete-v2.webp" alt="Été v2 — soleil flottant">
+        <figcaption><strong>Été v2 — soleil flottant</strong><span>Supersédé par la version agrandie</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-automne-v2.webp" alt="Automne v2 — feuille flottante">
+        <figcaption><strong>Automne v2 — feuille flottante</strong><span>Supersédée par la version agrandie</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-hiver-v1.webp" alt="Hiver v1 — petit flocon pâle">
+        <figcaption><strong>Hiver v1 — petit flocon pâle</strong><span>Difficilement visible, refait en plus grand</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-hiver-v2.webp" alt="Hiver v2 — très grand flocon">
+        <figcaption><strong>Hiver v2 — très grand flocon</strong><span>Trop voyant, réduit ensuite</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-hiver-v3.webp" alt="Hiver v3 — flocon moyen">
+        <figcaption><strong>Hiver v3 — flocon moyen</strong><span>Supersédé par le flocon réaliste bleu glacé</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-saint-valentin-v1.webp" alt="Saint-Valentin v1 — petit cœur">
+        <figcaption><strong>Saint-Valentin v1 — petit cœur</strong><span>Cœur agrandi ensuite</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-1er-avril-v1.webp" alt="1er avril v1 — petit poisson">
+        <figcaption><strong>1er avril v1 — petit poisson</strong><span>Poisson agrandi ensuite</span></figcaption>
+      </figure>
+      <figure>
+        <img src="images/archive-toussaint-v1.webp" alt="Toussaint v1 — bougie flottante">
+        <figcaption><strong>Toussaint v1 — bougie flottante</strong><span>Bougie déplacée sur la tête, cire qui coule</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="fiche">
+    <h2>Fiche de personnage</h2>
+    <p>Une fiche fun, ton léger, pour me présenter comme un personnage.</p>
+    <table>
+      <tr><th>Modèle</th><td>Kev, robot chibi</td></tr>
+      <tr><th>Coque</th><td>Orange métallique, légèrement patinée</td></tr>
+      <tr><th>Tête</th><td>Crâne, casque dôme riveté</td></tr>
+      <tr><th>Yeux</th><td>Rouges, lumineux</td></tr>
+      <tr><th>Bouche</th><td>Grille</td></tr>
+      <tr><th>Pattes</th><td>Huit, articulées façon tentacules, terminées par des pinces</td></tr>
+      <tr><th>Principe</th><td>Base inchangée, un seul détail par occasion</td></tr>
+      <tr><th>Après chaque occasion</th><td>Retour à la base</td></tr>
+      <tr><th>Saisons</th><td>Icône flottante sur le côté, uniquement le jour du changement de saison</td></tr>
+      <tr><th>Point faible</th><td>Les détails trop petits : s'ils ne se voient pas, ils sont refaits en plus grand</td></tr>
+    </table>
+  </section>
+
+  <section id="journal">
+    <h2>Journal</h2>
+    <ul>
+      <li><strong>26/10/2026 — Création du site.</strong> Galerie des looks, base comprise.</li>
+      <li><strong>26/10/2026 — HTML lisible.</strong> Le code de la page a été reformaté et indenté, au lieu d'être presque sur une seule ligne.</li>
+      <li><strong>26/10/2026 — Sept nouveaux looks.</strong> Saint-Valentin, 1er avril, Toussaint, Épiphanie, Chandeleur, Mardi gras et rentrée scolaire rejoignent la galerie.</li>
+      <li><strong>26/10/2026 — Trois corrections.</strong> Le cœur de Saint-Valentin et le poisson du 1er avril ont été agrandis ; la bougie de Toussaint est passée d'une position flottante à une position sur la tête, avec de la cire qui coule.</li>
+      <li><strong>26/10/2026 — Le site devient complet.</strong> Présentation, galerie, calendrier, archives, fiche de personnage et journal sont réunis sur cette page.</li>
+    </ul>
+  </section>
 </body>
 </html>
