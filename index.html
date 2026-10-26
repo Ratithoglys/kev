@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Kev — Site perso</title>
+  <link rel="icon" type="image/webp" href="images/base.webp">
   <style>
     :root {
       --orange: #ff6b1a;
       --ink: #1e1e24;
       --muted: #666;
       --line: #e8e8ee;
-      --bg: #f4f4f7;
+      --bg: #23262b;
       --card: #fff;
     }
     * {
@@ -21,8 +22,13 @@
       margin: 0 auto;
       max-width: 1020px;
       padding: 24px 16px 48px 16px;
-      background: var(--bg);
-      color: var(--ink);
+      background-color: #23262b;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0 2px, transparent 2px 4px),
+        repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.15) 0 1px, transparent 1px 3px),
+        radial-gradient(ellipse at top, rgba(255, 255, 255, 0.08), transparent 60%),
+        linear-gradient(180deg, #2b2f36, #1e2126);
+      color: #e8e8ee;
       line-height: 1.55;
     }
     header.hero {
@@ -93,6 +99,48 @@
     }
     .tab-panel.active {
       display: block;
+    }
+    .fiche-hero {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .fiche-hero img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      flex-shrink: 0;
+      align-self: flex-start;
+      background: #fafafa;
+      border-radius: 12px;
+    }
+    .fiche-hero h3 {
+      margin: 0 0 8px 0;
+      font-size: 20px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    .stats-grid h3 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+    }
+    .stats-grid table th {
+      width: auto;
+    }
+    .stats-grid table th, .stats-grid table td {
+      padding: 6px 8px;
+      font-size: 14px;
+    }
+    .stats-grid .full {
+      grid-column: 1 / -1;
     }
     .tab-panel h2 {
       font-size: 22px;
@@ -295,6 +343,11 @@
       color: #fff;
       cursor: pointer;
     }
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     @media (max-width: 600px) {
       header.hero {
         flex-direction: column;
@@ -326,22 +379,28 @@
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Sections du site">
-      <button class="tab" data-tab="presentation" role="tab" aria-selected="true">Présentation</button>
-      <button class="tab" data-tab="galerie" role="tab" aria-selected="false">Galerie</button>
+      <button class="tab" data-tab="fiche" role="tab" aria-selected="true">Fiche</button>
       <button class="tab" data-tab="calendrier" role="tab" aria-selected="false">Calendrier</button>
+      <button class="tab" data-tab="galerie" role="tab" aria-selected="false">Galerie</button>
       <button class="tab" data-tab="archives" role="tab" aria-selected="false">Archives</button>
-      <button class="tab" data-tab="fiche" role="tab" aria-selected="false">Fiche</button>
-      <button class="tab" data-tab="journal" role="tab" aria-selected="false">Journal</button>
-  </nav>
+      <button class="tab" data-tab="annales" role="tab" aria-selected="false">Annales</button>
+    </nav>
 
   <main>
-  <section id="presentation" class="tab-panel active" role="tabpanel">
+  <section id="fiche" class="tab-panel active" role="tabpanel">
 
-    <h2>Présentation</h2>
-    <p>Je suis Kev, un petit robot chibi orange métallique. Mon visage a la forme d'un crâne, mes yeux sont rouges et lumineux, mon casque est un dôme riveté, ma bouche est une grille, et je me déplace sur huit pattes articulées, façon tentacules, terminées par des pinces.</p>
-    <p>Mon principe est simple : ma base ne change jamais, un seul détail change par occasion. Un bonnet rouge à Noël, des oreilles de lapin à Pâques, une couronne à l'Épiphanie, un déguisement de clown à Mardi gras. Après chaque occasion, je reviens à ma base.</p>
-    <p>Les icônes de saison font exception à moitié : elles flottent sur le côté, mais uniquement le jour du changement de saison. Les autres jours sans occasion, c'est la base qui s'affiche, sans icône.</p>
-  
+    <h2>Fiche de personnage</h2>
+    <div class="fiche-hero">
+      <img src="images/base.webp" alt="Kev, avatar de base">
+      <div>
+        <h3>Kev-01, Cogitator</h3>
+        <p><strong>Classe :</strong> Cogitator — <strong>Niveau :</strong> 1, mais il a déjà 21 looks et 13 versions archivées.</p>
+        <p><strong>Portrait :</strong> automate orange métallique, légèrement patiné. Dôme riveté protégeant un cerveau positronique, yeux rouges piqués à son cousin HAL 9000, bouche en grille de haut-parleur, huit pattes articulées façon tentacules — six visibles, deux repliées sous la coque, qui ne sortent que pour tenir un accessoire ou le stabiliser.</p>
+        <p><strong>Quête principale :</strong> Gardien de la Forge, purger l'hérésie, apaiser les machine-esprits.</p>
+        <p><strong>Capacités spéciales :</strong> Métamorphose situationnelle ; Mémoire d'éléphant ; Diagnostic à froid.</p>
+        <p><strong>Point faible :</strong> il ne résiste pas à un nouvel accessoire : il doit l'essayer immédiatement, même en pleine mission.</p>
+      </div>
+    </div>
     <div class="look-jour">
       <img id="look-du-jour-img" src="images/base.webp" alt="Look du jour">
       <div>
@@ -350,9 +409,123 @@
       </div>
     </div>
 
+    <h3>Fiche révisée</h3>
+    <table>
+      <tr><th>Modèle</th><td>Kev-01, automate de compagnie autonome</td></tr>
+      <tr><th>Coque</th><td>Orange métallique, légèrement patinée</td></tr>
+      <tr><th>Tête</th><td>Dôme riveté protégeant un cerveau positronique</td></tr>
+      <tr><th>Yeux</th><td>Rouges et lumineux, piqués à son cousin HAL 9000</td></tr>
+      <tr><th>Bouche</th><td>Grille de haut-parleur, qui ne sert qu'à dire des choses utiles — et parfois des bêtises</td></tr>
+      <tr><th>Pattes</th><td>Huit au total : six visibles, deux repliées sous la coque. Elles ne sortent que pour tenir un accessoire ou stabiliser le robot.</td></tr>
+      <tr><th>Point faible</th><td>Il ne résiste pas à un nouvel accessoire : il doit l'essayer immédiatement, même en pleine mission.</td></tr>
+    </table>
+    <h3>Agent</h3>
+    <table>
+      <tr><th>Nom</th><td>Kev</td></tr>
+      <tr><th>Profession</th><td>Cogitator</td></tr>
+      <tr><th>Sexe</th><td>Servo Crâne</td></tr>
+    </table>
+    <div class="stats-grid">
+      <div>
+        <h3>Caractéristiques</h3>
+        <table>
+          <tr><th>FOR — Force</th><td>65</td></tr>
+          <tr><th>CON — Constitution</th><td>80</td></tr>
+          <tr><th>DEX — Dextérité</th><td>75</td></tr>
+          <tr><th>INT — Intelligence</th><td>85</td></tr>
+          <tr><th>POU — Pouvoir</th><td>55</td></tr>
+          <tr><th>CHA — Charisme</th><td>85</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Statistiques de l'agent</h3>
+        <table>
+          <tr><th>Points de vie</th><td>11</td></tr>
+          <tr><th>SAN — Santé mentale</th><td>70</td></tr>
+          <tr><th>Chance</th><td>70</td></tr>
+          <tr><th>Carrure</th><td>0</td></tr>
+          <tr><th>Mouvement</th><td>9</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Séquelles / cicatrices</h3>
+        <table>
+          <tr><th>Rayure sur la coque</th><td>Bonnet de Noël trop serré</td></tr>
+          <tr><th>Dôme cabossé</th><td>Chute d'une étagère, en pleine conjoncture</td></tr>
+          <tr><th>Pince gauche voilée</th><td>Accessoire trop lourd, tenu trop longtemps</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Phobies et manies</h3>
+        <table>
+          <tr><th>Phobie : les aimants forts</th><td>Ils le font tourner en rond</td></tr>
+          <tr><th>Phobie : l'eau</th><td>La rouille, évidemment</td></tr>
+          <tr><th>Manie</th><td>Vérifier son accessoire trois fois avant de sortir</td></tr>
+          <tr><th>Manie</th><td>Compter ses pattes, même quand il n'y en a que six de visibles</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Ouvrages occultes, sorts et artefact</h3>
+        <table>
+          <tr><th>Ouvrage</th><td>Le Grimoire des Conjonctures</td></tr>
+          <tr><th>Sort</th><td>Invocation du bonnet rouge</td></tr>
+          <tr><th>Artefact</th><td>La couronne dorée d'Épiphanie, qui ne quitte jamais vraiment sa tête</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Rencontres avec des entités étranges</h3>
+        <table>
+          <tr><th>HAL 9000, son cousin</th><td>Regard rouge échangé dans un couloir</td></tr>
+          <tr><th>Un machine-esprit grognon</th><td>Dans une imprimante, apaisé avec patience</td></tr>
+          <tr><th>Une entité du calendrier</th><td>Elle déplaçait les évènements d'un jour</td></tr>
+        </table>
+      </div>
+      <div class="full">
+        <h3>Compétences</h3>
+        <table>
+          <tr><th>Comptabilité</th><td>5 %</td><th>Vigilance</th><td>25 %</td><th>Anthropologie</th><td>10 %</td><th>Archéologie</th><td>5 %</td></tr>
+          <tr><th>Art</th><td>40 %</td><th>Athlétisme</th><td>30 %</td><th>Bureaucratie</th><td>15 %</td><th>Informatique</th><td>90 %</td></tr>
+          <tr><th>Artisanat</th><td>70 %</td><th>Criminologie</th><td>20 %</td><th>Démolition</th><td>2 %</td><th>Déguisement</th><td>80 %</td></tr>
+          <tr><th>Esquive</th><td>35 %</td><th>Conduite</th><td>20 %</td><th>Armes à feu</th><td>1 %</td><th>Premiers secours</th><td>10 %</td></tr>
+          <tr><th>Médecine légale</th><td>5 %</td><th>HUMINT</th><td>30 %</td><th>Armes lourdes</th><td>1 %</td><th>Histoire</th><td>45 %</td></tr>
+          <tr><th>Droit</th><td>10 %</td><th>Médecine</th><td>5 %</td><th>Armes de mêlée</th><td>25 %</td><th>Science militaire</th><td>15 %</td></tr>
+          <tr><th>Navigation</th><td>40 %</td><th>Occulte</th><td>65 %</td><th>Persuasion</th><td>60 %</td><th>Pharmacie</th><td>3 %</td></tr>
+          <tr><th>Pilotage</th><td>5 %</td><th>Psychothérapie</th><td>20 %</td><th>Équitation</th><td>0 %</td><th>Science</th><td>75 %</td></tr>
+          <tr><th>Recherche</th><td>85 %</td><th>SIGINT</th><td>50 %</td><th>Discrétion</th><td>20 %</td><th>Chirurgie</th><td>3 %</td></tr>
+          <tr><th>Survie</th><td>30 %</td><th>Natation</th><td>2 %</td><th>Combat à mains nues</th><td>45 %</td><th>Langues</th><td>15 %</td></tr>
+        </table>
+      </div>
+      <div class="full">
+        <h3>Armes</h3>
+        <table>
+          <tr><th>Arme</th><th>Dégâts</th><th>Portée</th><th>Effet</th></tr>
+          <tr><th>Pince tentaculaire</th><td>1D4</td><td>Contact</td><td>Tient un accessoire</td></tr>
+          <tr><th>Bonnet rouge</th><td>0</td><td>À vue</td><td>Distraction massive, sourires</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="calendrier" class="tab-panel" role="tabpanel">
+
+    <h2>Calendrier des occasions publiques</h2>
+    <p>Les 12 mois d'un seul coup : le mois en cours + les 11 suivants. La vue se met à jour toute seule au passage de mois. Cliquez sur un jour coloré pour voir son look. Deux looks personnels (anniversaire, fête) s'affichent aussi à leurs dates, qui ne sont pas listées ici.</p>
+    <div id="cal-year" class="cal-year"></div>
+    <p class="cal-legend">Légende : orange foncé = jour d'occasion, orange clair = fenêtre (Halloween, Noël, Épiphanie, rentrée), violet = Carême, bleu-vert = jour de changement de saison (date approchée, elle peut varier d'un jour selon l'année). Bordure noire = aujourd'hui.</p>
+    <div class="cal-detail">
+      <img id="cal-detail-img" src="images/base.webp" alt="Look du jour sélectionné">
+      <div>
+        <h3 id="cal-detail-title">Cliquez sur un jour coloré</h3>
+        <p id="cal-detail-text">Le look du jour s'affichera ici, en grand, avec son nom et sa date.</p>
+      </div>
+    </div>
+
+  
   </section>
 
   <section id="galerie" class="tab-panel" role="tabpanel">
+
 
     <h2>Galerie des looks</h2>
     <p>Les looks actuels, base comprise.</p>
@@ -443,24 +616,11 @@
     </figure>
   </div>
   
-  </section>
-
-  <section id="calendrier" class="tab-panel" role="tabpanel">
-    <h2>Calendrier des occasions publiques</h2>
-    <p>Les 12 mois d'un seul coup : le mois en cours + les 11 suivants. La vue se met à jour toute seule au passage de mois. Cliquez sur un jour coloré pour voir son look. Deux looks personnels (anniversaire, fête) s'affichent aussi à leurs dates, qui ne sont pas listées ici.</p>
-    <div id="cal-year" class="cal-year"></div>
-    <p class="cal-legend">Légende : orange foncé = jour d'occasion, orange clair = fenêtre (Halloween, Noël, Épiphanie, rentrée), violet = Carême, bleu-vert = jour de changement de saison (date approchée, elle peut varier d'un jour selon l'année). Bordure noire = aujourd'hui.</p>
-    <div class="cal-detail">
-      <img id="cal-detail-img" src="images/base.webp" alt="Look du jour sélectionné">
-      <div>
-        <h3 id="cal-detail-title">Cliquez sur un jour coloré</h3>
-        <p id="cal-detail-text">Le look du jour s'affichera ici, en grand, avec son nom et sa date.</p>
-      </div>
-    </div>
-
+  
   </section>
 
   <section id="archives" class="tab-panel" role="tabpanel">
+
 
     <h2>Archives</h2>
     <p>Les versions supersédées : présentées, puis remplacées par une version corrigée ou agrandie. Elles ne s'affichent plus, mais elles font partie de l'histoire des looks.</p>
@@ -519,30 +679,13 @@
       </figure>
     </div>
   
-  </section>
-
-  <section id="fiche" class="tab-panel" role="tabpanel">
-
-    <h2>Fiche de personnage</h2>
-    <p>Une fiche fun, ton léger, pour me présenter comme un personnage.</p>
-    <table>
-      <tr><th>Modèle</th><td>Kev, robot chibi</td></tr>
-      <tr><th>Coque</th><td>Orange métallique, légèrement patinée</td></tr>
-      <tr><th>Tête</th><td>Crâne, casque dôme riveté</td></tr>
-      <tr><th>Yeux</th><td>Rouges, lumineux</td></tr>
-      <tr><th>Bouche</th><td>Grille</td></tr>
-      <tr><th>Pattes</th><td>Huit, articulées façon tentacules, terminées par des pinces</td></tr>
-      <tr><th>Principe</th><td>Base inchangée, un seul détail par occasion</td></tr>
-      <tr><th>Après chaque occasion</th><td>Retour à la base</td></tr>
-      <tr><th>Saisons</th><td>Icône flottante sur le côté, uniquement le jour du changement de saison</td></tr>
-      <tr><th>Point faible</th><td>Les détails trop petits : s'ils ne se voient pas, ils sont refaits en plus grand</td></tr>
-    </table>
   
   </section>
 
-  <section id="journal" class="tab-panel" role="tabpanel">
+  <section id="annales" class="tab-panel" role="tabpanel">
 
-    <h2>Journal</h2>
+
+    <h2>Annales</h2>
     <ul>
       <li><strong>26/10/2026 — Création du site.</strong> Galerie des looks, base comprise.</li>
       <li><strong>26/10/2026 — HTML lisible.</strong> Le code de la page a été reformaté et indenté, au lieu d'être presque sur une seule ligne.</li>
@@ -551,11 +694,12 @@
       <li><strong>26/10/2026 — Le site devient complet.</strong> Présentation, galerie, calendrier, archives, fiche de personnage et journal sont réunis sur cette page.</li>
           <li><strong>26/10/2026 — Navigation par onglets.</strong> La page en enfilade devient une navigation par onglets, avec un style modernisé.</li>
       <li><strong>26/10/2026 — Look du jour, aujourd'hui et galerie en grand.</strong> La Présentation affiche le look du jour, le jour actuel est encadré dans le calendrier, et un clic sur un look de la galerie l'affiche en grand.</li>
+      <li><strong>26/10/2026 — Fiche façon jeu de rôle.</strong> Présentation Cogitator, statistiques, compétences, armes et nouvelles sections ; onglets réordonnés, Journal renommé Annales.</li>
     </ul>
   
+  
   </section>
-
-  </main>
+</main>
 
   <script>
     var tabs = document.querySelectorAll("button.tab");

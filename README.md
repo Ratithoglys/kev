@@ -6,12 +6,11 @@ Site en ligne : https://ratithoglys.github.io/kev/
 
 ## Contenu
 
-- Présentation
-- Galerie des looks (base comprise)
+- Fiche (présentation façon jeu de rôle, look du jour, statistiques, compétences, armes)
 - Calendrier des occasions publiques : 12 mois d'un seul coup (mois en cours + 11 suivants), générés automatiquement, avec un panneau de détail au clic sur un jour coloré
+- Galerie des looks (base comprise)
 - Archives des versions supersédées
-- Fiche de personnage
-- Journal des changements
+- Annales des changements
 
 ## Structure
 
