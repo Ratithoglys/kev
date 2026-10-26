@@ -2,7 +2,7 @@
 
 Petit robot orange. Un seul détail par occasion, et une icône flottante le jour du changement de saison.
 
-Site en ligne : https://ratithoglys.github.io/kev/
+Site en ligne : https://kev.ebumna.net/
 
 ## Contenu
 
