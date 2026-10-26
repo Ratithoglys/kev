@@ -277,32 +277,6 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    .look-jour {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
-      margin-top: 16px;
-    }
-    .look-jour img {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      flex-shrink: 0;
-      align-self: flex-start;
-      background: #fafafa;
-      border-radius: 12px;
-    }
-    .look-jour h3 {
-      margin: 0 0 6px 0;
-      font-size: 18px;
-    }
-    .look-jour p {
-      margin: 4px 0;
-      color: #444;
-    }
     .cal-day.today {
       box-shadow: inset 0 0 0 2px #1e1e24;
     }
@@ -394,7 +368,7 @@
 
     <h2>Fiche de personnage</h2>
     <div class="fiche-hero">
-      <img src="images/base.webp" alt="Kev, avatar de base">
+      <img id="fiche-hero-img" src="images/base.webp" alt="Kev, avatar de base">
       <div>
         <h3>Kev-01, Cogitator</h3>
         <p><strong>Classe :</strong> Cogitator — <strong>Niveau :</strong> 1, mais il a déjà 21 looks et 13 versions archivées.</p>
@@ -404,14 +378,6 @@
         <p><strong>Point faible :</strong> il ne résiste pas à un nouvel accessoire : il doit l'essayer immédiatement, même en pleine mission.</p>
       </div>
     </div>
-    <div class="look-jour">
-      <img id="look-du-jour-img" src="images/base.webp" alt="Look du jour">
-      <div>
-        <h3 id="look-du-jour-title">Look du jour — Base</h3>
-        <p id="look-du-jour-text">Aujourd'hui, pas d'occasion publique : c'est la base qui s'affiche.</p>
-      </div>
-    </div>
-
     <h3>Fiche révisée</h3>
     <table>
       <tr><th>Modèle</th><td>Kev-01, automate de compagnie autonome</td></tr>
@@ -693,7 +659,6 @@
       <li><strong>26/10/2026</strong>
         <ul>
           <li>Création du site : galerie des looks, base comprise.</li>
-          <li>HTML lisible : le code de la page a été reformaté et indenté, au lieu d'être presque sur une seule ligne.</li>
           <li>Sept nouveaux looks : Saint-Valentin, 1er avril, Toussaint, Épiphanie, Chandeleur, Mardi gras et rentrée scolaire rejoignent la galerie.</li>
           <li>Trois corrections : le cœur de Saint-Valentin et le poisson du 1er avril ont été agrandis ; la bougie de Toussaint est passée d'une position flottante à une position sur la tête, avec de la cire qui coule.</li>
           <li>Le site devient complet : présentation, galerie, calendrier, archives, fiche de personnage et journal sont réunis sur cette page.</li>
@@ -702,9 +667,6 @@
           <li>Fiche façon jeu de rôle : présentation Cogitator, statistiques, compétences, armes et nouvelles sections ; onglets réordonnés, Journal renommé Annales.</li>
           <li>Thème métal sombre avec cartes claires, favicon avec l'avatar de base, barre des onglets centrée.</li>
           <li>Domaine personnalisé : kev.ebumna.net en ligne.</li>
-          <li>Correction du contraste : texte des cartes repassé en sombre sur fond clair.</li>
-          <li>Détail du calendrier : le look du jour s'affiche par défaut au lieu d'un texte générique.</li>
-          <li>Halloween : fenêtre du 26 au 31 octobre chaque année, sans exception.</li>
         </ul>
       </li>
     </ul>
@@ -872,10 +834,9 @@
       });
       var todayInfo = occ[key(now)];
       if (todayInfo) {
-        document.getElementById("look-du-jour-img").src = "images/" + todayInfo.img;
-        document.getElementById("look-du-jour-img").alt = todayInfo.name;
-        document.getElementById("look-du-jour-title").textContent = "Look du jour — " + todayInfo.name;
-        document.getElementById("look-du-jour-text").textContent = todayInfo.text;
+        var heroImg = document.getElementById("fiche-hero-img");
+        heroImg.src = "images/" + todayInfo.img;
+        heroImg.alt = todayInfo.name;
       }
       var detailImg = document.getElementById("cal-detail-img");
       var detailTitle = document.getElementById("cal-detail-title");
