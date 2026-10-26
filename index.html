@@ -141,6 +141,91 @@
     th {
       color: var(--muted);
     }
+    .cal-year {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .cal-month {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .cal-month h3 {
+      font-size: 15px;
+      margin: 0 0 8px 0;
+    }
+    .cal-wd, .cal-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      text-align: center;
+      font-size: 11px;
+    }
+    .cal-wd {
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .cal-day {
+      padding: 3px 0;
+      border-radius: 6px;
+    }
+    .cal-day.clickable {
+      cursor: pointer;
+    }
+    .cal-day.occasion {
+      background: #ff6b1a;
+      color: #fff;
+      font-weight: 700;
+    }
+    .cal-day.range {
+      background: #ffe4d1;
+      font-weight: 600;
+    }
+    .cal-day.lent {
+      background: #f3efff;
+    }
+    .cal-day.season {
+      background: #d6f0f0;
+      font-weight: 600;
+    }
+    .cal-legend {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 16px;
+    }
+    .cal-detail {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+    .cal-detail img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      flex-shrink: 0;
+      align-self: flex-start;
+      background: #fafafa;
+      border-radius: 12px;
+    }
+    .cal-detail h3 {
+      margin: 0 0 6px 0;
+      font-size: 18px;
+    }
+    .cal-detail p {
+      margin: 4px 0;
+      color: #444;
+    }
+    @media (max-width: 900px) {
+      .cal-year {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
     @media (max-width: 600px) {
       header.hero {
         flex-direction: column;
@@ -284,31 +369,18 @@
   </section>
 
   <section id="calendrier" class="tab-panel" role="tabpanel">
-
     <h2>Calendrier des occasions publiques</h2>
-    <p>Les dates publiques, dans l'ordre de l'année. Deux looks personnels (anniversaire, fête) s'affichent aussi à leurs dates, qui ne sont pas listées ici.</p>
-    <table>
-      <tr><th>Date</th><th>Look</th></tr>
-      <tr><td>05 au 10/01</td><td>Épiphanie — couronne de roi dorée</td></tr>
-      <tr><td>02/02</td><td>Chandeleur — crêpe dorée</td></tr>
-      <tr><td>Veille du mercredi des Cendres</td><td>Mardi gras — déguisement de clown</td></tr>
-      <tr><td>14/02</td><td>Saint-Valentin — cœur rouge</td></tr>
-      <tr><td>Mercredi des Cendres au samedi saint</td><td>Carême — croix de cendres et violet</td></tr>
-      <tr><td>Vers le 20/03</td><td>Printemps — fleur flottante (jour de l'équinoxe uniquement)</td></tr>
-      <tr><td>Dimanche de Pâques</td><td>Pâques — oreilles de lapin</td></tr>
-      <tr><td>01/04</td><td>1er avril — poisson</td></tr>
-      <tr><td>Vers le 21/06</td><td>Été — soleil flottant (jour du solstice uniquement)</td></tr>
-      <tr><td>14/07</td><td>14 juillet — bonnet phrygien et ballons</td></tr>
-      <tr><td>02/08/2027</td><td>Éclipse solaire totale — lunettes d'éclipse (one-shot)</td></tr>
-      <tr><td>01 au 07/09</td><td>Rentrée scolaire — cartable</td></tr>
-      <tr><td>Vers le 22/09</td><td>Automne — feuille flottante (jour de l'équinoxe uniquement)</td></tr>
-      <tr><td>30 au 31/10</td><td>Halloween — sorcière</td></tr>
-      <tr><td>01/11</td><td>Toussaint — bougie sur la tête</td></tr>
-      <tr><td>Vers le 21/12</td><td>Hiver — flocon réaliste bleu glacé (jour du solstice uniquement)</td></tr>
-      <tr><td>20 au 26/12</td><td>Noël — bonnet rouge</td></tr>
-      <tr><td>31/12 au 01/01</td><td>Nouvel An — chapeau et confettis</td></tr>
-    </table>
-  
+    <p>Les 12 mois d'un seul coup : le mois en cours + les 11 suivants. La vue se met à jour toute seule au passage de mois. Cliquez sur un jour coloré pour voir son look. Deux looks personnels (anniversaire, fête) s'affichent aussi à leurs dates, qui ne sont pas listées ici.</p>
+    <div id="cal-year" class="cal-year"></div>
+    <p class="cal-legend">Légende : orange foncé = jour d'occasion, orange clair = fenêtre (Halloween, Noël, Épiphanie, rentrée), violet = Carême, bleu-vert = jour de changement de saison (date approchée, elle peut varier d'un jour selon l'année).</p>
+    <div class="cal-detail">
+      <img id="cal-detail-img" src="images/base.webp" alt="Look du jour sélectionné">
+      <div>
+        <h3 id="cal-detail-title">Cliquez sur un jour coloré</h3>
+        <p id="cal-detail-text">Le look du jour s'affichera ici, en grand, avec son nom et sa date.</p>
+      </div>
+    </div>
+
   </section>
 
   <section id="archives" class="tab-panel" role="tabpanel">
@@ -436,6 +508,133 @@
     if (document.getElementById(start)) {
       showTab(start);
     }
+  </script>
+  <script>
+    // Pâques (algorithme grégorien anonyme), vérifié : 2027-03-28, 2028-04-16, 2029-04-01, 2030-04-21.
+    function easter(y) {
+      var a = y % 19, b = Math.floor(y / 100), c = y % 100;
+      var d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+      var g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+      var i = Math.floor(c / 4), k = c % 4;
+      var l = (32 + 2 * e + 2 * i - h - k) % 7;
+      var m = Math.floor((a + 11 * h + 22 * l) / 451);
+      var month = Math.floor((h + l - 7 * m + 114) / 31);
+      var day = ((h + l - 7 * m + 114) % 31) + 1;
+      return new Date(y, month - 1, day);
+    }
+    function addDays(d, n) {
+      var r = new Date(d);
+      r.setDate(r.getDate() + n);
+      return r;
+    }
+    function key(d) {
+      return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    }
+    function buildOccasions(years) {
+      var occ = {};
+      function set(d, name, kind, img, text) {
+        occ[key(d)] = { name: name, kind: kind, img: img, text: text, date: new Date(d) };
+      }
+      function range(y, m, from, to, name, img, text) {
+        for (var d = from; d <= to; d++) set(new Date(y, m, d), name, "range", img, text);
+      }
+      years.forEach(function (y) {
+        var eas = easter(y);
+        var ash = addDays(eas, -46);
+        var holySat = addDays(eas, -1);
+        // Carême d'abord : les occasions, fenêtres et saisons le recouvrent ensuite.
+        for (var d = new Date(ash); d <= holySat; d = addDays(d, 1)) {
+          set(d, "Carême", "lent", "careme.webp", "Période du Carême, du mercredi des Cendres au samedi saint.");
+        }
+        // Saisons : dates approchées (peuvent varier d'un jour selon l'année).
+        set(new Date(y, 2, 20), "Printemps", "season", "printemps.webp", "Jour de l'équinoxe de printemps, icône flottante sur le côté.");
+        set(new Date(y, 5, 21), "Été", "season", "ete.webp", "Jour du solstice d'été, icône flottante sur le côté.");
+        set(new Date(y, 8, 22), "Automne", "season", "automne.webp", "Jour de l'équinoxe d'automne, icône flottante sur le côté.");
+        set(new Date(y, 11, 21), "Hiver", "season", "hiver.webp", "Jour du solstice d'hiver, icône flottante sur le côté.");
+        // Fenêtres.
+        if (y === 2026) range(y, 9, 26, 31, "Halloween", "halloween.webp", "Halloween, exception 2026 : sorcière du 26 au 31 octobre.");
+        else range(y, 9, 30, 31, "Halloween", "halloween.webp", "Halloween, sorcière les 30 et 31 octobre.");
+        range(y, 11, 20, 26, "Noël", "noel.webp", "Noël, bonnet rouge du 20 au 26 décembre.");
+        range(y, 0, 5, 10, "Épiphanie", "epiphanie.webp", "Épiphanie, couronne de roi dorée du 5 au 10 janvier.");
+        range(y, 8, 1, 7, "Rentrée scolaire", "rentree.webp", "Rentrée scolaire, cartable la première semaine de septembre.");
+        // Jours uniques.
+        set(new Date(y, 1, 2), "Chandeleur", "occasion", "chandeleur.webp", "Chandeleur, crêpe dorée tenue dans une pince.");
+        set(addDays(ash, -1), "Mardi gras", "occasion", "mardi-gras.webp", "Mardi gras, déguisement de clown, la veille du mercredi des Cendres.");
+        set(new Date(y, 1, 14), "Saint-Valentin", "occasion", "saint-valentin.webp", "Saint-Valentin, cœur rouge.");
+        set(eas, "Pâques", "occasion", "paques.webp", "Pâques, oreilles de lapin.");
+        set(new Date(y, 3, 1), "1er avril", "occasion", "1er-avril.webp", "1er avril, poisson dans le dos.");
+        set(new Date(y, 6, 14), "14 juillet", "occasion", "14-juillet.webp", "14 juillet, bonnet phrygien et ballons bleu, blanc et rouge.");
+        set(new Date(y, 10, 1), "Toussaint", "occasion", "toussaint.webp", "Toussaint, bougie sur la tête, cire qui coule.");
+        set(new Date(y, 11, 31), "Nouvel An", "occasion", "nouvel-an.webp", "Nouvel An, chapeau de fête et confettis, du 31 décembre au 1er janvier.");
+        set(new Date(y, 0, 1), "Nouvel An", "occasion", "nouvel-an.webp", "Nouvel An, chapeau de fête et confettis, du 31 décembre au 1er janvier.");
+        if (y === 2027) set(new Date(y, 7, 2), "Éclipse", "occasion", "eclipse.webp", "Éclipse solaire totale du 2 août 2027, lunettes d'éclipse (one-shot).");
+      });
+      return occ;
+    }
+    (function () {
+      var now = new Date();
+      var months = [];
+      for (var i = 0; i < 12; i++) {
+        var d = new Date(now.getFullYear(), now.getMonth() + i, 1);
+        months.push(d);
+      }
+      var years = [];
+      months.forEach(function (d) {
+        if (years.indexOf(d.getFullYear()) === -1) years.push(d.getFullYear());
+      });
+      var occ = buildOccasions(years);
+      var monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+      var dayNames = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+      var container = document.getElementById("cal-year");
+      months.forEach(function (first) {
+        var y = first.getFullYear(), m = first.getMonth();
+        var card = document.createElement("div");
+        card.className = "cal-month";
+        var title = document.createElement("h3");
+        title.textContent = monthNames[m] + " " + y;
+        card.appendChild(title);
+        var wd = document.createElement("div");
+        wd.className = "cal-wd";
+        ["L", "M", "M", "J", "V", "S", "D"].forEach(function (l) {
+          var s = document.createElement("span");
+          s.textContent = l;
+          wd.appendChild(s);
+        });
+        card.appendChild(wd);
+        var days = document.createElement("div");
+        days.className = "cal-days";
+        var blanks = (first.getDay() + 6) % 7;
+        for (var b = 0; b < blanks; b++) {
+          var e = document.createElement("span");
+          e.className = "cal-day";
+          days.appendChild(e);
+        }
+        var count = new Date(y, m + 1, 0).getDate();
+        for (var n = 1; n <= count; n++) {
+          var date = new Date(y, m, n);
+          var info = occ[key(date)];
+          var span = document.createElement("span");
+          span.className = "cal-day" + (info ? " clickable " + info.kind : "");
+          span.textContent = n;
+          if (info) {
+            span.title = info.name;
+            span.addEventListener("click", (function (inf) {
+              return function () {
+                var d = inf.date;
+                document.getElementById("cal-detail-img").src = "images/" + inf.img;
+                document.getElementById("cal-detail-img").alt = inf.name;
+                document.getElementById("cal-detail-title").textContent =
+                  dayNames[d.getDay()] + " " + d.getDate() + " " + monthNames[d.getMonth()].toLowerCase() + " " + d.getFullYear() + " — " + inf.name;
+                document.getElementById("cal-detail-text").textContent = inf.text;
+              };
+            })(info));
+          }
+          days.appendChild(span);
+        }
+        card.appendChild(days);
+        container.appendChild(card);
+      });
+    })();
   </script>
 </body>
 </html>
