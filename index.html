@@ -36,6 +36,7 @@
       gap: 20px;
       align-items: center;
       background: var(--card);
+      color: var(--ink);
       border: 1px solid var(--line);
       border-radius: 20px;
       padding: 20px 24px;
@@ -92,6 +93,7 @@
     .tab-panel {
       display: none;
       background: var(--card);
+      color: var(--ink);
       border: 1px solid var(--line);
       border-radius: 20px;
       padding: 24px;
@@ -517,8 +519,8 @@
     <div class="cal-detail">
       <img id="cal-detail-img" src="images/base.webp" alt="Look du jour sélectionné">
       <div>
-        <h3 id="cal-detail-title">Cliquez sur un jour coloré</h3>
-        <p id="cal-detail-text">Le look du jour s'affichera ici, en grand, avec son nom et sa date.</p>
+        <h3 id="cal-detail-title">Sélectionnez un jour coloré</h3>
+        <p id="cal-detail-text">Choisissez un jour coloré dans le calendrier pour voir son look et sa description.</p>
       </div>
     </div>
 
@@ -688,14 +690,22 @@
 
     <h2>Annales</h2>
     <ul>
-      <li><strong>26/10/2026 — Création du site.</strong> Galerie des looks, base comprise.</li>
-      <li><strong>26/10/2026 — HTML lisible.</strong> Le code de la page a été reformaté et indenté, au lieu d'être presque sur une seule ligne.</li>
-      <li><strong>26/10/2026 — Sept nouveaux looks.</strong> Saint-Valentin, 1er avril, Toussaint, Épiphanie, Chandeleur, Mardi gras et rentrée scolaire rejoignent la galerie.</li>
-      <li><strong>26/10/2026 — Trois corrections.</strong> Le cœur de Saint-Valentin et le poisson du 1er avril ont été agrandis ; la bougie de Toussaint est passée d'une position flottante à une position sur la tête, avec de la cire qui coule.</li>
-      <li><strong>26/10/2026 — Le site devient complet.</strong> Présentation, galerie, calendrier, archives, fiche de personnage et journal sont réunis sur cette page.</li>
-          <li><strong>26/10/2026 — Navigation par onglets.</strong> La page en enfilade devient une navigation par onglets, avec un style modernisé.</li>
-      <li><strong>26/10/2026 — Look du jour, aujourd'hui et galerie en grand.</strong> La Présentation affiche le look du jour, le jour actuel est encadré dans le calendrier, et un clic sur un look de la galerie l'affiche en grand.</li>
-      <li><strong>26/10/2026 — Fiche façon jeu de rôle.</strong> Présentation Cogitator, statistiques, compétences, armes et nouvelles sections ; onglets réordonnés, Journal renommé Annales.</li>
+      <li><strong>26/10/2026</strong>
+        <ul>
+          <li>Création du site : galerie des looks, base comprise.</li>
+          <li>HTML lisible : le code de la page a été reformaté et indenté, au lieu d'être presque sur une seule ligne.</li>
+          <li>Sept nouveaux looks : Saint-Valentin, 1er avril, Toussaint, Épiphanie, Chandeleur, Mardi gras et rentrée scolaire rejoignent la galerie.</li>
+          <li>Trois corrections : le cœur de Saint-Valentin et le poisson du 1er avril ont été agrandis ; la bougie de Toussaint est passée d'une position flottante à une position sur la tête, avec de la cire qui coule.</li>
+          <li>Le site devient complet : présentation, galerie, calendrier, archives, fiche de personnage et journal sont réunis sur cette page.</li>
+          <li>Navigation par onglets : la page en enfilade devient une navigation par onglets, avec un style modernisé.</li>
+          <li>Look du jour, aujourd'hui et galerie en grand : la Présentation affiche le look du jour, le jour actuel est encadré dans le calendrier, et un clic sur un look de la galerie l'affiche en grand.</li>
+          <li>Fiche façon jeu de rôle : présentation Cogitator, statistiques, compétences, armes et nouvelles sections ; onglets réordonnés, Journal renommé Annales.</li>
+          <li>Thème métal sombre avec cartes claires, favicon avec l'avatar de base, barre des onglets centrée.</li>
+          <li>Domaine personnalisé : kev.ebumna.net en ligne.</li>
+          <li>Correction du contraste : texte des cartes repassé en sombre sur fond clair.</li>
+          <li>Détail du calendrier : le look du jour s'affiche par défaut au lieu d'un texte générique.</li>
+        </ul>
+      </li>
     </ul>
   
   
@@ -866,6 +876,18 @@
         document.getElementById("look-du-jour-img").alt = todayInfo.name;
         document.getElementById("look-du-jour-title").textContent = "Look du jour — " + todayInfo.name;
         document.getElementById("look-du-jour-text").textContent = todayInfo.text;
+      }
+      var detailImg = document.getElementById("cal-detail-img");
+      var detailTitle = document.getElementById("cal-detail-title");
+      var detailText = document.getElementById("cal-detail-text");
+      if (todayInfo) {
+        detailImg.src = "images/" + todayInfo.img;
+        detailImg.alt = todayInfo.name;
+        detailTitle.textContent = dayNames[now.getDay()] + " " + now.getDate() + " " + monthNames[now.getMonth()].toLowerCase() + " " + now.getFullYear() + " — " + todayInfo.name;
+        detailText.textContent = todayInfo.text;
+      } else {
+        detailTitle.textContent = "Aujourd'hui — Base";
+        detailText.textContent = "Aujourd'hui, pas d'occasion publique : c'est la base qui s'affiche.";
       }
     })();
   </script>
