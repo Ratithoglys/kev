@@ -704,6 +704,7 @@
           <li>Domaine personnalisé : kev.ebumna.net en ligne.</li>
           <li>Correction du contraste : texte des cartes repassé en sombre sur fond clair.</li>
           <li>Détail du calendrier : le look du jour s'affiche par défaut au lieu d'un texte générique.</li>
+          <li>Halloween : fenêtre du 26 au 31 octobre chaque année, sans exception.</li>
         </ul>
       </li>
     </ul>
@@ -785,8 +786,7 @@
         set(new Date(y, 8, 22), "Automne", "season", "automne.webp", "Jour de l'équinoxe d'automne, icône flottante sur le côté.");
         set(new Date(y, 11, 21), "Hiver", "season", "hiver.webp", "Jour du solstice d'hiver, icône flottante sur le côté.");
         // Fenêtres.
-        if (y === 2026) range(y, 9, 26, 31, "Halloween", "halloween.webp", "Halloween, exception 2026 : sorcière du 26 au 31 octobre.");
-        else range(y, 9, 30, 31, "Halloween", "halloween.webp", "Halloween, sorcière les 30 et 31 octobre.");
+        range(y, 9, 26, 31, "Halloween", "halloween.webp", "Halloween, sorcière du 26 au 31 octobre.");
         range(y, 11, 20, 26, "Noël", "noel.webp", "Noël, bonnet rouge du 20 au 26 décembre.");
         range(y, 0, 5, 10, "Épiphanie", "epiphanie.webp", "Épiphanie, couronne de roi dorée du 5 au 10 janvier.");
         range(y, 8, 1, 7, "Rentrée scolaire", "rentree.webp", "Rentrée scolaire, cartable la première semaine de septembre.");
